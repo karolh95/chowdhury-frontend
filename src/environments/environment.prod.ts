@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+	production: true,
+	ws: `ws://${window.location.hostname}:8080/ws`
 };
