@@ -1,0 +1,19 @@
+<mat-nav-list>
+
+    <ng-container *ngFor="let category of categories">
+
+        <h1 matSubheader>{{category.label}}</h1>
+        <mat-divider></mat-divider>
+
+        <ng-container *ngFor="let link of category.links">
+
+            <a mat-list-item href={{link.url}}>
+				{{link.label}}
+				<mat-icon *ngIf="link.icon">{{link.icon}}</mat-icon>
+			</a>
+
+        </ng-container>
+
+    </ng-container>
+
+</mat-nav-list>

@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-drawer {
+    width: fit-content;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+mat-drawer-content {
+    padding: 20px;
+}

@@ -3,7 +3,6 @@ import { Client, IFrame, Message, StompConfig, StompSubscription } from '@stomp/
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { isConnected, SocketState } from '../models/SocketState';
 
 @Injectable({ providedIn: 'root' })
 export class SocketClientService implements OnDestroy {
@@ -23,8 +22,8 @@ export class SocketClientService implements OnDestroy {
 		this.state = new BehaviorSubject<SocketState>(SocketState.ATTEMPTING);
 		this.client = new Client(this.config);
 
-		this.client.onConnect = this.onConnect;
-		this.client.onStompError = this.onStompError;
+		this.client.onConnect = this.onConnect.bind(this);
+		this.client.onStompError = this.onStompError.bind(this);
 
 		this.client.activate();
 	}
@@ -56,7 +55,7 @@ export class SocketClientService implements OnDestroy {
 	private onConnect() {
 
 		this.state.next(SocketState.CONNECTED);
-		console.log("Connected!");
+		console.log('Broker connected!');
 	}
 
 	private onStompError(frame: IFrame) {
@@ -76,4 +75,13 @@ export class SocketClientService implements OnDestroy {
 
 		return new Observable<Client>(observer);
 	}
+}
+
+enum SocketState {
+	ATTEMPTING, CONNECTED
+}
+
+function isConnected(state: SocketState) {
+
+	return state === SocketState.CONNECTED;
 }
