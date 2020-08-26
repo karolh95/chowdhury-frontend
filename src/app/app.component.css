@@ -19,3 +19,7 @@ mat-drawer-container {
 mat-drawer-content {
     padding: 20px;
 }
+
+model {
+    margin-bottom: 20px;
+}
